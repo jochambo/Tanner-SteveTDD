@@ -35,4 +35,31 @@ describe "Task" do
       expect(task.created_at).to be_an_instance_of Time
     end
   end
+
+  context "#mark_as_complete!" do
+    it "changes the status of a task to complete" do
+      task.mark_as_complete!
+      expect(task.status).to eq("complete")
+    end
+  end
+
+  context "#mark_as_incomplete!" do
+    it "changes the status of a task to incomplete" do
+      task.stub(:status) {"YOLO"}
+      task.mark_as_incomplete!
+      expect(task.status).to eq("incomplete")
+    end
+  end
+
+  context "#complete?" do
+    it "returns true when status is complete" do
+      task.stub(:status) {"complete"}
+      expect(task.complete?).to eq(true)
+    end
+
+    it "returns false when status is incomplete" do
+      task.stub(:status) {"incomplete"}
+      expect(task.complete?).to eq(false)
+    end
+  end
 end
