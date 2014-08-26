@@ -20,7 +20,7 @@ describe "Task" do
 
   context "#description" do
     it "returns the description" do
-      exepct(task.description).to eq("description")
+      expect(task.description).to eq("description")
     end
   end
 
