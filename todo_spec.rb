@@ -122,9 +122,46 @@ describe "Todo" do
         task_dummy.stub(:complete? => true)
         todo.add_task(task_dummy)
       end
-
       expect(todo.complete?).to eq(true)
+    end
+  end
 
+  context "#completed_tasks" do
+    #3 completed tasks
+    it "returns an array of all completed tasks" do
+      3.times do
+        task_dummy = double("Task")
+        task_dummy.stub(:status => "complete")
+        task_dummy.stub(:complete? => true)
+        todo.add_task(task_dummy)
+      end
+      #4 incomplete tasks
+      4.times do
+        task_dummy = double("Task")
+        task_dummy.stub(:status => "incomplete")
+        task_dummy.stub(:complete? => false)
+        todo.add_task(task_dummy)
+      end
+      expect(todo.completed_tasks.length).to eq(3)
+    end
+  end
+
+  context "#incomplete_tasks" do
+    it "returns an array of all incomplete tasks" do
+      3.times do
+        task_dummy = double("Task")
+        task_dummy.stub(:status => "complete")
+        task_dummy.stub(:complete? => true)
+        todo.add_task(task_dummy)
+      end
+      #4 incomplete tasks
+      4.times do
+        task_dummy = double("Task")
+        task_dummy.stub(:status => "incomplete")
+        task_dummy.stub(:complete? => false)
+        todo.add_task(task_dummy)
+      end
+      expect(todo.incomplete_tasks.length).to eq(4)
     end
   end
 end
